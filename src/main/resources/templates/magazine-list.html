@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Magazine Management</title>
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: header}"></div>
+
+<h1>Magazine Management (CRUD)</h1>
+
+<!-- Link to the Create Form -->
+<a th:href="@{/magazines/new}">
+    <button>+ Add New Magazine</button>
+</a>
+<br/><br/>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Publisher</th>
+        <th>Current Issue</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="magazine : ${magazines}">
+        <td th:text="${magazine.id}">1</td>
+        <td th:text="${magazine.title}">Title</td>
+        <td th:text="${magazine.publisher}">Publisher</td>
+        <td th:text="${magazine.currentIssue}">Current Issue</td>
+        <td th:text="${'$' + magazine.price}">$0.00</td>
+        <td>
+            <!-- Link to Edit, injecting the magazine's ID into the URL -->
+            <a th:href="@{/magazines/edit/{id}(id=${magazine.id})}">Edit</a> |
+
+            <!-- Link to Delete, injecting the magazine's ID into the URL -->
+            <a th:href="@{/magazines/delete/{id}(id=${magazine.id})}"
+               onclick="return confirm('Are you sure you want to delete this magazine?');">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<a th:href="@{/inventory}">Back to Main Inventory</a>
+</body>
+</html>

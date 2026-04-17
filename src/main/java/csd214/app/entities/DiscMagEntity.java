@@ -18,8 +18,8 @@ public class DiscMagEntity extends MagazineEntity {
         super();
     }
 
-    public DiscMagEntity(String title, double price, int copies, int orderQty, Date currentIssue, boolean hasDisc) {
-        super(title, price, copies, orderQty, currentIssue);
+    public DiscMagEntity(String title, double price, int copies, int orderQty, Date currentIssue, String publisher, boolean hasDisc) {
+        super(title, price, copies, orderQty, currentIssue, publisher);
         this.hasDisc = hasDisc;
     }
 

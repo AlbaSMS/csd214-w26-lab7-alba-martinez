@@ -6,14 +6,16 @@ import java.util.Scanner;
 public class Magazine extends Publication {
     private int orderQty = 0;
     private Date currentIssue = new Date();
+    private String publisher = "";
 
     public Magazine() {
     }
 
-    public Magazine(int orderQty, Date currentIssue, String title, double price, int copies) {
+    public Magazine(int orderQty, Date currentIssue, String publisher, String title, double price, int copies) {
         super(title, price, copies);
         this.orderQty = orderQty;
         this.currentIssue = currentIssue;
+        this.publisher = publisher;
     }
 
     @Override
@@ -25,8 +27,10 @@ public class Magazine extends Publication {
         System.out.println("Enter Current Issue Date (dd-MMM-yyyy):");
         this.currentIssue = getInput(input, new Date());
 
-        super.initialize(input); // Title
+        System.out.println("Enter Publisher:");
+        this.publisher = getInput(input, "");
 
+        super.initialize(input); // Title
     }
 
     @Override
@@ -38,6 +42,9 @@ public class Magazine extends Publication {
 
         System.out.println("Edit Issue Date [" + this.currentIssue + "]:");
         this.currentIssue = getInput(input, this.currentIssue);
+
+        System.out.println("Edit Publisher [" + this.publisher + "]:");
+        this.publisher = getInput(input, this.publisher);
     }
 
     @Override
@@ -50,9 +57,11 @@ public class Magazine extends Publication {
     public void setOrderQty(int o) { this.orderQty = o; }
     public Date getCurrentIssue() { return currentIssue; }
     public void setCurrentIssue(Date d) { this.currentIssue = d; }
+    public String getPublisher() { return publisher; }
+    public void setPublisher(String p) { this.publisher = p; }
 
     @Override
     public String toString() {
-        return "Magazine{orderQty=" + orderQty + ", issue=" + currentIssue + ", " + super.toString() + "}";
+        return "Magazine{orderQty=" + orderQty + ", issue=" + currentIssue + ", publisher=" + publisher + ", " + super.toString() + "}";
     }
 }

@@ -19,7 +19,4 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     // SELECT * FROM products WHERE UPPER(name) LIKE UPPER('%name%')
     // --------------------------------------------------------
     List<ProductEntity> findByNameContainingIgnoreCase(String name);
-
-    // We can also search specifically by author since BookEntity inherits from ProductEntity
-    List<ProductEntity> findByAuthorContainingIgnoreCase(String author);
 }
