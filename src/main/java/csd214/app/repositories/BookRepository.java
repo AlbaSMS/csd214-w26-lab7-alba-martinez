@@ -12,5 +12,4 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     // Now this works perfectly!
     // Spring knows BookEntity has an "author" field.
     List<BookEntity> findByAuthorContainingIgnoreCase(String author);
-
 }

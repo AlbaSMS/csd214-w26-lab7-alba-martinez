@@ -2,6 +2,7 @@ package csd214.app;
 
 import com.github.javafaker.Faker;
 import csd214.app.entities.BookEntity;
+import csd214.app.entities.MagazineEntity;
 import csd214.app.repositories.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

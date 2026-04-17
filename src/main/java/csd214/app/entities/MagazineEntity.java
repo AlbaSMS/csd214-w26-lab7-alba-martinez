@@ -1,6 +1,7 @@
 package csd214.app.entities;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.Objects;
@@ -13,19 +14,22 @@ public class MagazineEntity extends PublicationEntity {
     private int orderQty;
 
     @Column(name = "issue_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE) // Stores as DATE in MySQL (no time component)
     private Date currentIssue;
+    private String publisher;
 
     public MagazineEntity() {
         super();
     }
 
-    public MagazineEntity(String title, double price, int copies, int orderQty, Date currentIssue) {
+    public MagazineEntity(String title, double price, int copies, int orderQty, Date currentIssue, String publisher) {
         this.setTitle(title);
         this.setPrice(price);
         this.setCopies(copies);
         this.orderQty = orderQty;
         this.currentIssue = currentIssue;
+        this.publisher = publisher;
     }
 
     public int getOrderQty() {
@@ -44,17 +48,25 @@ public class MagazineEntity extends PublicationEntity {
         this.currentIssue = currentIssue;
     }
 
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MagazineEntity that)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        return orderQty == that.orderQty && Objects.equals(currentIssue, that.currentIssue);
+        MagazineEntity that = (MagazineEntity) o;
+        return getOrderQty() == that.getOrderQty() && Objects.equals(getCurrentIssue(), that.getCurrentIssue()) && Objects.equals(getPublisher(), that.getPublisher());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), orderQty, currentIssue);
+        return Objects.hash(super.hashCode(), getOrderQty(), getCurrentIssue(), getPublisher());
     }
 
     @Override
@@ -62,6 +74,7 @@ public class MagazineEntity extends PublicationEntity {
         return "MagazineEntity{" +
                 "orderQty=" + orderQty +
                 ", currentIssue=" + currentIssue +
-                "} " + super.toString();
+                ", publisher='" + publisher + '\'' +
+                '}';
     }
 }
